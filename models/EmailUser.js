@@ -7,4 +7,5 @@ const emailUserSchema = new Schema({
 });
 
 mongoose.model('emailUsers', emailUserSchema);
-// using two arguments in the model means we are loading something into mongoose
+// using two arguments in the model means we are loading something into mongoose. 
+// first argument tells what the model class is.
