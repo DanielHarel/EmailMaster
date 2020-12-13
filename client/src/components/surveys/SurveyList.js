@@ -1,14 +1,17 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 import {fetchSurveys} from '../../actions';
 
-class SurveyList extends React.Component {
-    componentDidMount() {
-        this.props.fetchSurveys();
-    }
+const SurveyList = (props) => {
 
-    renderSurveys() {
-        return this.props.surveys.reverse().map(survey => {
+    useEffect(() => {
+        props.fetchSurveys()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
+    const renderSurveys = () => {
+        return props.surveys.reverse().map(survey => {
             return (
                 <div className="card blue-grey darken-1" key={survey._id}>
                     <div className="card-content white-text">
@@ -29,14 +32,13 @@ class SurveyList extends React.Component {
         });
     }
 
-    render() {
-        return (
-            <div>
-                {this.renderSurveys()}
-            </div>
-        );
-    }
+    return (
+        <div>
+            {renderSurveys()}
+        </div>
+    );
 }
+
 
 const mapStateToProps = (state) => {
     return { surveys: state.surveys }

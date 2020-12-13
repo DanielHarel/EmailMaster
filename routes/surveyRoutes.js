@@ -6,7 +6,6 @@ const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
-const { send } = require('@sendgrid/mail');
 
 const Survey = mongoose.model('surveys');
 
@@ -65,8 +64,6 @@ module.exports = app => {
             dateSent: Date.now()
         });
 
-
-        // great place to send the email
         const mailer = new Mailer(survey, surveyTemplate(survey));
         try {
             await mailer.send();

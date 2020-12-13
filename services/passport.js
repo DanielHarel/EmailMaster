@@ -10,12 +10,17 @@ passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-    emailUser.findById(id)
-        .then(user => {
-            done(null, user)
+// passport.deserializeUser((id, done) => {
+//     emailUser.findById(id)
+//         .then(user => {
+//             done(null, user)
+//         });
+// });
+
+passport.deserializeUser(async (id, done) => {
+    const user = await emailUser.findById(id)
+    done(null, user);
         });
-});
 
 passport.use(
     new GoogleStrategy(
