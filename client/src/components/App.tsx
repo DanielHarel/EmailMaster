@@ -8,7 +8,11 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew'
 
-const App = (props) => {
+interface AppProps {
+    fetchUser: Function;
+}
+
+const App = (props: AppProps): JSX.Element => {
     
     useEffect(() => {
         props.fetchUser();
