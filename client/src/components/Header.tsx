@@ -9,31 +9,14 @@ interface HeaderProps {
         credits: Number;
         googleId: String;
         id: String;
-    } | null;
+    };
 }
 
 const Header = (props: HeaderProps): JSX.Element => {
-    console.log(props);
     
-    const renderContent = (): JSX.Element => {
-        // switch (props.auth) {
-        //     case null:
-        //         return <></>;
-        //     case false:
-        //         return (
-        //             <li><a href="/auth/google">Login With Google</a></li>
-        //         );
-        //     default:
-        //         return (
-        //             <>
-        //             <li><Payments/></li>
-        //             <li style={{ margin: '0 10px' }}>Credits: {props.auth.credits}</li>
-        //             <li><a href="/api/logout">LogOut</a></li>
-        //             </>
-        //         );
-        // }
+    const renderContent = (): JSX.Element | undefined=> {
         if (props.auth === null) {
-            return <></>;
+            return;
         }
         if (!props.auth) {
             return (

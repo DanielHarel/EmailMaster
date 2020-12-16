@@ -3,14 +3,18 @@ import StripeCheckout from 'react-stripe-checkout';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 
-const Payments = (props) => {
+interface PaymentsProps {
+    handleToken: Function;
+}
+
+const Payments = (props: PaymentsProps) => {
     return (
         <StripeCheckout
             name="EmailMaster"
             description="$5 for 5 email credits"
             amount={500}
             token={token => props.handleToken(token)}
-            stripeKey={process.env.REACT_APP_STRIPE_KEY}
+            stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
             
         >
         <button className="btn">Add Credits</button>

@@ -1,14 +1,24 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field, FormErrors } from 'redux-form';
 import {Link} from 'react-router-dom';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails'
 import formFields from './formFields';
 
-const SurveyForm = (props) => {
+interface SurveyFormProps {
+    handleSubmit: Function;
+    onSurveySubmit: Function;
+}
 
-    const renderFields = () => {
-        return formFields.map(({label, name}) => {
+interface FormFields {
+    [key: string]: string;
+}
+
+const SurveyForm = (props: SurveyFormProps): JSX.Element => {
+
+    const renderFields = (): JSX.Element[] => {
+        return formFields.map(({label, name}): JSX.Element => {
             return <Field key={name} component={SurveyField} type="text" label={label} name={name} />
         });
     }
@@ -26,23 +36,28 @@ const SurveyForm = (props) => {
     );
     }
 
-const validate = (values) => {
-    const errors = {};
-
+const validate = (values: FormFields): FormErrors<FormFields> => {
+    const errors: FormErrors<FormFields> = {};
+    
     errors.recipients = validateEmails(values.recipients || '');
-
-
     formFields.forEach((field) => {
-        if (!values[field.name]) {
+        if (!values[field.name]) { 
             errors[field.name] = 'You must provide a value'
         }
     });
-
     return errors;
 }
 
-export default reduxForm({
+// export default reduxForm({
+//     validate: validate,
+//     form: 'surveyForm',
+//     destroyOnUnmount: false
+// })(SurveyForm);
+
+const form = reduxForm<{}, SurveyFormProps>({
     validate: validate,
     form: 'surveyForm',
     destroyOnUnmount: false
 })(SurveyForm);
+
+export default connect(null)(form);

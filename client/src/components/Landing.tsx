@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Landing = () => {
+const Landing = (): JSX.Element => {
     return (
         <div style={{textAlign: "center"}}>
             <h1>
