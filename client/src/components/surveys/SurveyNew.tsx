@@ -3,10 +3,10 @@ import {reduxForm} from 'redux-form';
 import SurveyForm from './SurveyForm';
 import SurveyFormReview from './SurveyFormReview';
 
-const SurveyNew = () => {
+const SurveyNew = (): JSX.Element => {
     const [showFormReview, setShowFormReview] = useState(false);
 
-    const renderContent = () => {
+    const renderContent = (): JSX.Element => {
         if (showFormReview) {
             return <SurveyFormReview onCancel={() => setShowFormReview(false)} />;
         }

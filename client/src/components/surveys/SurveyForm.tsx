@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, FormErrors } from 'redux-form';
+import { reduxForm, Field, FormErrors, InjectedFormProps } from 'redux-form';
 import {Link} from 'react-router-dom';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails'
 import formFields from './formFields';
 
 interface SurveyFormProps {
-    handleSubmit: Function;
     onSurveySubmit: Function;
 }
 
@@ -15,7 +14,9 @@ interface FormFields {
     [key: string]: string;
 }
 
-const SurveyForm = (props: SurveyFormProps): JSX.Element => {
+const SurveyForm = (props: SurveyFormProps & InjectedFormProps<{}, SurveyFormProps>): JSX.Element => {
+
+    console.log(props);
 
     const renderFields = (): JSX.Element[] => {
         return formFields.map(({label, name}): JSX.Element => {

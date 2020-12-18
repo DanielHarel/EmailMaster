@@ -2,9 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import formFields from './formFields';
 import * as actions from '../../actions';
-import {withRouter} from 'react-router-dom';
+import {withRouter, RouteComponentProps} from 'react-router-dom';
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+interface SurveyFormReviewProps {
+    onCancel: Function;
+    formValues: {
+        [key:string]: string
+    };
+    submitSurvey: Function;
+    history: String[];
+}
+
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }: SurveyFormReviewProps & RouteComponentProps): JSX.Element => {
 
     const reviewFields = formFields.map(({name, label}) => {
         return (
@@ -21,7 +30,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
         <div>
             <h5>Please review your entries</h5>
             {reviewFields}
-             <button className="yellow white-text darken-3 btn-flat" onClick={onCancel}>Back</button>
+             <button className="yellow white-text darken-3 btn-flat" onClick={() => onCancel()}>Back</button>
              <button className="green white-text btn-flat right" onClick={() => submitSurvey(formValues, history)}>
                 Send Survey
                 <i className="material-icons right">email</i>
@@ -30,7 +39,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
     );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return {formValues: state.form.surveyForm.values};
 }
 
