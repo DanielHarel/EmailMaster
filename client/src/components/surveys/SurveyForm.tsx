@@ -16,8 +16,6 @@ interface FormFields {
 
 const SurveyForm: React.FC<SurveyFormProps & InjectedFormProps<{}, SurveyFormProps>> = (props: any): JSX.Element => {
 
-    console.log(props);
-
     const renderFields = (): JSX.Element[] => {
         return formFields.map(({label, name}): JSX.Element => {
             return <Field key={name} component={SurveyField} type="text" label={label} name={name} />

@@ -18,7 +18,6 @@ interface SurveyListProps {
 }
 
 const SurveyList: React.FC<SurveyListProps> = (props): JSX.Element => {
-    console.log(props);
 
     useEffect(() => {
         props.fetchSurveys()
