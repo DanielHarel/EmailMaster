@@ -13,7 +13,7 @@ interface SurveyFormReviewProps {
     history: String[];
 }
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }: SurveyFormReviewProps & RouteComponentProps): JSX.Element => {
+const SurveyFormReview: React.FC<SurveyFormReviewProps & RouteComponentProps> = ({ onCancel, formValues, submitSurvey, history }): JSX.Element => {
 
     const reviewFields = formFields.map(({name, label}) => {
         return (

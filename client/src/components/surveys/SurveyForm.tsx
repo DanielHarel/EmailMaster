@@ -14,7 +14,7 @@ interface FormFields {
     [key: string]: string;
 }
 
-const SurveyForm = (props: SurveyFormProps & InjectedFormProps<{}, SurveyFormProps>): JSX.Element => {
+const SurveyForm: React.FC<SurveyFormProps & InjectedFormProps<{}, SurveyFormProps>> = (props: any): JSX.Element => {
 
     console.log(props);
 

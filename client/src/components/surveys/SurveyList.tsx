@@ -3,7 +3,22 @@ import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 import {fetchSurveys} from '../../actions';
 
-const SurveyList = (props) => {
+interface Survey {
+    _id: string;
+    title: String;
+    body: String;
+    dateSent: string;
+    yes: Number;
+    no: Number;
+}
+
+interface SurveyListProps {
+    fetchSurveys: Function;
+    surveys: Survey[];
+}
+
+const SurveyList: React.FC<SurveyListProps> = (props): JSX.Element => {
+    console.log(props);
 
     useEffect(() => {
         props.fetchSurveys()
@@ -40,7 +55,7 @@ const SurveyList = (props) => {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return { surveys: state.surveys }
 }
 

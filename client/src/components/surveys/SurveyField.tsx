@@ -1,6 +1,15 @@
 import React from 'react';
 
-const SurveyField = ({input, label, meta: {error, touched}}) => {
+interface SurveyFormInterface {
+    input: String;
+    label: String;
+    meta: {
+        error: Boolean;
+        touched: Boolean;
+    };
+}
+
+const SurveyField: React.FC<SurveyFormInterface> = ({input, label, meta: {error, touched}}): JSX.Element => {
     return (
         <div>
             <label>{label}</label>
