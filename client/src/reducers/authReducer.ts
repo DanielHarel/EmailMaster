@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-import {ActionTypes} from '../actions/types';
+import {ActionTypes, Action} from '../actions/types';
 
-export default (state = null, action) => {
+export default (state = null, action: Action) => {
     switch (action.type) {
         case ActionTypes.FETCH_USER:
             return action.payload || false;
