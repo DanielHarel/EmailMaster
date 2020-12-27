@@ -1,5 +1,7 @@
 import React from 'react';
 
+// landing page
+
 const Landing = (): JSX.Element => {
     return (
         <div style={{textAlign: "center"}}>

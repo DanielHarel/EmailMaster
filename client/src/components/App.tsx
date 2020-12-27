@@ -14,6 +14,9 @@ interface AppProps {
 
 const App = (props: AppProps): JSX.Element => {
     
+    // the main App functional component. when it first loads up it uses useEffect to call the fetchUser action in order to
+    // check if the current user is logged in, and if so, what are his relevant details.
+
     useEffect(() => {
         props.fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -13,13 +13,15 @@ export interface FetchSurveysAction {
 }
 
 export const fetchUser = () =>
+// async that checks the current user via the api
     async (dispatch: Dispatch) => {
         const res = await axios.get('/api/current_user');
 
         dispatch<FetchUserAction>({type: ActionTypes.FETCH_USER, payload: res.data});
 };
 
-export const handleToken = (token: Object) => 
+export const handleToken = (token: Object) =>
+// async that posts the stripe token to the api. upon complition, updates the users credits
     async (dispatch: Dispatch) => {
         const res = await axios.post('/api/stripe', token);
 
@@ -27,6 +29,7 @@ export const handleToken = (token: Object) =>
 };
 
 export const submitSurvey = (values: Object, history: String[]) =>
+// async that posts a new survey to the api. upon complition, pushes the browser history to '/surveys'
     async (dispatch: Dispatch) => {
         const res = await axios.post('/api/surveys', values);
 
@@ -36,6 +39,7 @@ export const submitSurvey = (values: Object, history: String[]) =>
 };
 
 export const fetchSurveys = () => 
+// async fetching of the surveys associated with the current user. 
     async (dispatch: Dispatch) => {
         const res = await axios.get('/api/surveys');
     

@@ -10,6 +10,8 @@ interface SurveyFormInterface {
 }
 
 const SurveyField: React.FC<SurveyFormInterface> = ({input, label, meta: {error, touched}}): JSX.Element => {
+    // functional component representing a single field of input for the survey. after the field is touched, it
+    // checks automatically for errors.
     return (
         <div>
             <label>{label}</label>

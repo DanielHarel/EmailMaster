@@ -10,12 +10,13 @@ interface SurveyFormReviewProps {
         [key:string]: string
     };
     submitSurvey: Function;
-    history: String[];
 }
 
 const SurveyFormReview: React.FC<SurveyFormReviewProps & RouteComponentProps> = ({ onCancel, formValues, submitSurvey, history }): JSX.Element => {
-
+    // functional component that enables the user to review the survey before it is sent out.
+    
     const reviewFields = formFields.map(({name, label}) => {
+        // maps over the different fields of the form as defined in formFields and renders them.
         return (
             <div key={name}>
                 <label>{label}</label>
@@ -27,6 +28,9 @@ const SurveyFormReview: React.FC<SurveyFormReviewProps & RouteComponentProps> = 
     });
 
     return (
+        // renders the review window, a cancel button to call onCancel supplied through SurveyNew component and toggles
+        // the component state and Send button that calls submitSurvey action and hands the form values
+        // and history String[] retirived from RouteComponentProps of react-router-dom to change the history
         <div>
             <h5>Please review your entries</h5>
             {reviewFields}

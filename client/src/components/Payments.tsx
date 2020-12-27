@@ -7,6 +7,9 @@ interface PaymentsProps {
     handleToken: Function;
 }
 
+// this functional component handles the Stripe api money charge and uses the stripe key. it take a token and handles
+// it with the handleToken action supplied through the connect function as props
+
 const Payments = (props: PaymentsProps) => {
     return (
         <StripeCheckout
@@ -15,7 +18,6 @@ const Payments = (props: PaymentsProps) => {
             amount={500}
             token={token => props.handleToken(token)}
             stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
-            
         >
         <button className="btn">Add Credits</button>
         </StripeCheckout>

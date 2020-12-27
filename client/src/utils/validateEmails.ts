@@ -1,7 +1,7 @@
-/* eslint-disable import/no-anonymous-default-export */
-const re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+// general email address validation function
 
-export default (emails) => {
+export const validateEmails = (emails: String) => {
+    const re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const invalidEmails = emails
         .split(',')
         .map(email => email.trim())

@@ -19,12 +19,16 @@ interface SurveyListProps {
 
 const SurveyList: React.FC<SurveyListProps> = (props): JSX.Element => {
 
+    // a functional component to show the users past surveys. uses useEffect to fetch the users surveys on first load.
+
     useEffect(() => {
         props.fetchSurveys()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const renderSurveys = () => {
+        // this function takes all the surveys that arrive in array form and maps over them, rendering each one into a card.
+        // uses reverse() to show the most recent surveys first.
         return props.surveys.reverse().map(survey => {
             return (
                 <div className="card blue-grey darken-1" key={survey._id}>
@@ -47,9 +51,10 @@ const SurveyList: React.FC<SurveyListProps> = (props): JSX.Element => {
     }
 
     return (
-        <div>
+        // since renderSurveys returns an array, a reactFragment is needed.
+        <>
             {renderSurveys()}
-        </div>
+        </>
     );
 }
 
