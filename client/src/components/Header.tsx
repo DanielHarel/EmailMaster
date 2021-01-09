@@ -1,6 +1,7 @@
-import React from 'react';
+import { AppBar, Toolbar, Hidden, Typography, Button, makeStyles, Menu, MenuItem } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Payments from './Payments';
 
 interface HeaderProps {
@@ -15,10 +16,35 @@ interface HeaderProps {
 //  this is the header functional component.
 
 const Header = (props: HeaderProps): JSX.Element => {
+
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = (event: any) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          flexGrow: 1,
+        },
+        menuButton: {
+          marginRight: theme.spacing(2),
+        },
+        title: {
+          flexGrow: 1,
+        },
+      }));
+
+    const classes = useStyles();
     
     const renderContent = (): JSX.Element | undefined => {
         // renders the content of the header. if auth is undefined it renders login button. during the async request
-        // (when the auth is null) it renders nuthing. when auth is complete it renders the peyments component, users 
+        // (when the auth is null) it renders nothing. when auth is complete it renders the peyments component, users 
         // credit status and a logout button
 
         if (props.auth === null) {
@@ -26,38 +52,55 @@ const Header = (props: HeaderProps): JSX.Element => {
         }
         if (!props.auth) {
             return (
-                <li><a href="/auth/google">Login With Google</a></li>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant="h6" className={classes.title}>
+                            <Button color="inherit" href='/'>EmailMaster</Button>
+                        </Typography>
+                        <Button color="inherit" href="/auth/google" variant="outlined">Login With Google</Button>
+                    </Toolbar>
+                </AppBar>
             );
         } else {
             return (
-                <>
-                <li><Payments/></li>
-                <li style={{ margin: '0 10px' }}>Credits: {props.auth.credits}</li>
-                <li><a href="/api/logout">LogOut</a></li>
-                </>
+                <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        <Button color="inherit" href='/surveys'>EmailMaster</Button>
+                    </Typography>
+                    <Hidden mdUp>
+                        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        <MenuIcon style={{ color: '#FFFFFF' }} />
+                        </Button>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>Credits: {props.auth.credits}</MenuItem>
+                            <MenuItem onClick={handleClose}><Payments/></MenuItem>
+                            <MenuItem onClick={handleClose}><Button color="inherit" href="/api/logout" variant="outlined" style={{marginLeft : 20}}>LogOut</Button></MenuItem>
+                        </Menu>
+                    </Hidden>
+                    <Hidden only={['xs', 'sm']}>
+                        <div style={{display: 'flex', alignItems: 'space-between'}}>
+                        <Typography variant="h6" className={classes.title} style={{marginRight : 20}}>Credits: {props.auth.credits}</Typography>
+                        <Payments/>
+                        <Button color="inherit" href="/api/logout" variant="outlined" style={{marginLeft : 20}}>LogOut</Button>
+                        </div>
+                    </Hidden>
+                </Toolbar>
+                </AppBar>
             );
         }
     }
 
     return (
-        <nav>
-            <div className="nav-wrapper">
-                {/* this link redirect to the surveys page if user is logged in or the home if not logged in */}
-                <Link to={props.auth ? '/surveys' : '/'} 
-                className="left brand-logo" 
-                style={{marginLeft : 10}}
-                >
-                EmailMaster
-                </Link>
-                <ul className="right">
-                    {renderContent()}
-                </ul>
-            </div>
-        </nav>
+        <div>{renderContent()}</div>
     );
 }
-
-
 
 const mapStateToProps = (state: any) => {
     return {auth: state.auth};

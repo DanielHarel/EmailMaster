@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
 const recipientSchema = new Schema({
     email: String,
     responded: {type: Boolean, default: false}
 });
 
-module.exports = recipientSchema;
+export default recipientSchema;
+
+// this is a mongodb subdocument.

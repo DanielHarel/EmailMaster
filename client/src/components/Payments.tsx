@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import {connect} from 'react-redux';
@@ -19,7 +20,7 @@ const Payments = (props: PaymentsProps) => {
             token={token => props.handleToken(token)}
             stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
         >
-        <button className="btn">Add Credits</button>
+        <Button color="inherit" variant="outlined">Add Credits</Button>
         </StripeCheckout>
     );
 };

@@ -1,6 +1,11 @@
-const keys = require('../../config/keys');
+import keys from '../../config/keys';
 
-module.exports = (survey) => {
+type Survey = {
+    body: String;
+    id: String;
+}
+
+const surveyTemplate = (survey: Survey) => {
     return `
         <html>
             <body>
@@ -19,3 +24,5 @@ module.exports = (survey) => {
         </html>
     `;
 };
+
+export default surveyTemplate;

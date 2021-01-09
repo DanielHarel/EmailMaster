@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface SurveyFormInterface {
-    input: String;
-    label: String;
+    input: string;
+    label: string;
     meta: {
-        error: Boolean;
-        touched: Boolean;
+        error: boolean | undefined;
+        touched: boolean | undefined;
+        invalid: boolean | undefined;
     };
 }
 
 const SurveyField: React.FC<SurveyFormInterface> = ({input, label, meta: {error, touched}}): JSX.Element => {
-    // functional component representing a single field of input for the survey. after the field is touched, it
-    // checks automatically for errors.
+
     return (
         <div>
             <label>{label}</label>
@@ -19,7 +19,6 @@ const SurveyField: React.FC<SurveyFormInterface> = ({input, label, meta: {error,
             <div className="red-text" style={{marginBottom: '20px'}}>
             {touched && error}
             </div>
-            
         </div>
     );
 };

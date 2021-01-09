@@ -34,7 +34,7 @@ const SurveyFormReview: React.FC<SurveyFormReviewProps & RouteComponentProps> = 
         <div>
             <h5>Please review your entries</h5>
             {reviewFields}
-             <button className="yellow white-text darken-3 btn-flat" onClick={() => onCancel()}>Back</button>
+             <button className="red white-text darken-3 btn-flat" onClick={() => onCancel()}>Back</button>
              <button className="green white-text btn-flat right" onClick={() => submitSurvey(formValues, history)}>
                 Send Survey
                 <i className="material-icons right">email</i>

@@ -6,6 +6,7 @@ import SurveyField from './SurveyField';
 import { validateEmails } from '../../utils/validateEmails'
 import formFields from './formFields';
 
+
 interface SurveyFormProps {
     onSurveySubmit: Function;
 }
@@ -27,12 +28,12 @@ const SurveyForm: React.FC<SurveyFormProps & InjectedFormProps<{}, SurveyFormPro
     
     return (
         // renders the redux form with the fields rendered through renderFields. 
-        <form onSubmit={props.handleSubmit(() => props.onSurveySubmit())}>
+        <form  onSubmit={props.handleSubmit(() => props.onSurveySubmit())}>
             {renderFields()}
-            <Link to="/surveys" className="red btn-flat white-text">
+            <Link to="/surveys" className="red white-text darken-3 btn-flat">
                 Cancel
             </Link>
-            <button type="submit" className="teal btn-flat right white-text">Next<i className="material-icons right">done</i></button>
+            <button type="submit" className="indigo btn-flat right white-text">Next<i className="material-icons right">done</i></button>
         </form>
     );
 }

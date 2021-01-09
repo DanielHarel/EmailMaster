@@ -23,13 +23,15 @@ const App = (props: AppProps): JSX.Element => {
     },[]);
 
     return (
-        <div className="container">
+        <div>
             <BrowserRouter>
-                <div>
+                <div className='indigo lighten-5' style={{height: '100vh'}}>
                     <Header />
+                    <div className="container">
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/surveys" component={Dashboard} />
                     <Route path="/surveys/new" component={SurveyNew} />
+                    </div>
                 </div>
             </BrowserRouter>
         </div>

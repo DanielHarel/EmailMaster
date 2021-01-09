@@ -1,16 +1,21 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-const bodyParser = require('body-parser');
+import express, { Express } from 'express';
+import mongoose from 'mongoose';
+import cookieSession from 'cookie-session';
+import passport from 'passport';
+import bodyParser from 'body-parser';
+
 const keys = require('./config/keys');
 require('./models/EmailUser');
 require('./models/Survey');
 require('./services/passport');
 
-
 mongoose.connect(keys.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-const app = express();
+
+import authRoutes from './routes/authRoutes';
+import billingRoutes from './routes/billingRoutes';
+import surveyRoutes from './routes/surveyRoutes';
+
+const app: Express = express();
 
 app.use(bodyParser.json());
 app.use(
@@ -23,9 +28,25 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/authRoutes')(app);
-require('./routes/billingRoutes')(app);
-require('./routes/surveyRoutes')(app);
+declare global {
+    namespace Express {
+        interface User {
+            credits: number;
+            save: Function;
+            id: string;
+        }
+    }
+}
+
+authRoutes(app);
+billingRoutes(app);
+surveyRoutes(app);
+
+// require('./routes/authRoutes')(app);
+// require('./routes/billingRoutes')(app);
+// require('./routes/surveyRoutes')(app);
+
+// require('./routes/surveyRoutesJs')(app);
 
 if (process.env.NODE_ENV === 'production')  {
     //making sure express will serve up production assets:
