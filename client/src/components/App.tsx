@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as actions from '../actions';
+import { ThemeProvider } from '@material-ui/core/styles';
 
+import theme from '../ui/theme';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
@@ -24,16 +26,18 @@ const App = (props: AppProps): JSX.Element => {
 
     return (
         <div>
-            <BrowserRouter>
-                <div className='indigo lighten-5' style={{height: '100vh'}}>
-                    <Header />
-                    <div className="container">
-                    <Route exact path="/" component={Landing} />
-                    <Route exact path="/surveys" component={Dashboard} />
-                    <Route path="/surveys/new" component={SurveyNew} />
-                    </div>
-                </div>
-            </BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <BrowserRouter>
+                    {/* <div className='indigo lighten-5' style={{height: '100%'}}> */}
+                        <Header />
+                        {/* <div className="container"> */}
+                        <Route exact path="/" component={Landing} />
+                        <Route exact path="/surveys" component={Dashboard} />
+                        <Route path="/surveys/new" component={SurveyNew} />
+                        {/* </div> */}
+                    {/* </div> */}
+                </BrowserRouter>
+            </ThemeProvider>
         </div>
     );
 };

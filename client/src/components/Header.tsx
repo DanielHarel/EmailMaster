@@ -1,8 +1,9 @@
-import { AppBar, Toolbar, Hidden, Typography, Button, makeStyles, Menu, MenuItem } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Payments from './Payments';
+
+import { AppBar, Toolbar, Hidden, Typography, Button, makeStyles, Menu, MenuItem } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 interface HeaderProps {
     dispatch: Function;
